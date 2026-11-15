@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CortechOS™ | Your mind. Your subscription.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            canvas: '#F8F9FA',
+            cardBg: '#FFFFFF',
+            inkDark: '#0A0D14',
+            inkMuted: '#525866',
+            electricCobalt: '#0F62FE',
+            electricHover: '#0043CE',
+            accentPink: '#F43F5E',
+            alertRed: '#DC2626',
+            successGreen: '#16A34A',
+            softBorder: 'rgba(10, 13, 20, 0.08)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F8F9FA;
+      color: #0A0D14;
+      -webkit-font-smoothing: antialiased;
+    }
+    .clean-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(10, 13, 20, 0.08);
+      box-shadow: 0 4px 20px -2px rgba(10, 13, 20, 0.03);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .clean-card:hover {
+      border-color: rgba(15, 98, 254, 0.3);
+      box-shadow: 0 12px 32px -4px rgba(15, 98, 254, 0.08);
+      transform: translateY(-2px);
+    }
+    .subtle-grid {
+      background-image: radial-gradient(rgba(10, 13, 20, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .badge-pill {
+      background: rgba(15, 98, 254, 0.08);
+      color: #0F62FE;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-electricCobalt selection:text-white subtle-grid">
+
+  <!-- Urgent Workplace Compliance Notice Bar -->
+  <div class="bg-inkDark text-white text-xs py-2.5 px-4 text-center font-medium tracking-wide">
+    <span class="inline-block w-2 h-2 rounded-full bg-alertRed animate-pulse mr-2"></span>
+    Notice: Un-augmented human cognition is no longer supported by modern employers. Book cranial surgery at <span class="underline decoration-white/40 underline-offset-2 font-bold font-mono">1-800-MY-BRAIN</span>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-softBorder">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-electricCobalt flex items-center justify-center shadow-sm">
+          <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <span class="font-display font-extrabold text-lg tracking-tight text-inkDark">CortechOS™</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-inkMuted">
+        <a href="#features" class="hover:text-inkDark transition-colors">Neural Features</a>
+        <a href="#stories" class="hover:text-inkDark transition-colors">Case Studies</a>
+        <a href="#plans" class="hover:text-inkDark transition-colors">Subscription Tiers</a>
+        <a href="#continuity" class="hover:text-inkDark transition-colors">Cancellation Policy</a>
+        <a href="#faq" class="hover:text-inkDark transition-colors">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <button onclick="openCancelModal()" class="text-xs font-medium text-inkMuted hover:text-alertRed px-3 py-2 transition-colors">
+          Manage / Cancel Plan
+        </button>
+        <a href="#plans" class="text-xs font-semibold px-4 py-2 rounded-full bg-electricCobalt text-white hover:bg-electricHover transition-all shadow-sm">
+          Book Surgery
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1">
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        
+        <!-- Pill Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full badge-pill text-xs font-semibold mb-8 border border-electricCobalt/20">
+          <span class="w-2 h-2 rounded-full bg-electricCobalt animate-ping"></span>
+          Now welcoming Standard, Gold and Platinum members
+        </div>
+
+        <!-- Master Headline -->
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-inkDark leading-[1.08] mb-6">
+          Why settle for the brain you were born with,<br class="hidden sm:inline">
+          when you can rent a better one?
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-lg sm:text-xl text-inkMuted max-w-2xl mx-auto leading-relaxed mb-10 font-normal">
+          Are you tired of having feelings? Tired of needing eight hours of sleep? Tired of an ordinary human brain? CortechOS™ replaces natural biological limits with a predictable monthly subscription. Think faster, sleep less, and leave the thinking to us.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <a href="#plans" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-electricCobalt text-white font-semibold text-sm hover:bg-electricHover transition-all shadow-md">
+            View Subscription Tiers
+          </a>
+          <button onclick="openCancelModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-inkDark border border-softBorder font-medium text-sm hover:bg-neutral-50 transition-all shadow-sm">
+            Check Cancellation Fee ($5,000)
+          </button>
+        </div>
+
+        <!-- Interactive Live Telemetry / Tier Preview Widget -->
+        <div class="clean-card rounded-3xl p-6 sm:p-8 text-left max-w-3xl mx-auto bg-white">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-softBorder">
+            <div>
+              <div class="text-[11px] font-mono font-bold text-electricCobalt uppercase tracking-wider mb-1">Live Telemetry Simulation</div>
+              <h2 class="font-display text-lg font-bold text-inkDark">Preview what your skull runs on each tier</h2>
+            </div>
+
+            <!-- Tier Switcher Pills -->
+            <div class="inline-flex p-1 rounded-full bg-neutral-100 border border-softBorder">
+              <button onclick="setPreviewTier('standard')" id="tab-standard" class="px-4 py-1.5 rounded-full text-xs font-semibold text-inkMuted hover:text-inkDark transition-all">Standard ($0)</button>
+              <button onclick="setPreviewTier('gold')" id="tab-gold" class="px-4 py-1.5 rounded-full text-xs font-semibold text-inkMuted hover:text-inkDark transition-all">Gold ($499)</button>
+              <button onclick="setPreviewTier('platinum')" id="tab-platinum" class="px-4 py-1.5 rounded-full text-xs font-semibold bg-white text-inkDark shadow-sm transition-all">Platinum ($1,499)</button>
+            </div>
+          </div>
+
+          <!-- Dynamic 4-Card Telemetry Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6" id="previewGrid">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="mt-5 pt-4 border-t border-softBorder flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-inkMuted">
+            <span id="previewFootnote">Platinum eliminates sleep completely (work 24/7) with 4K childhood recall and zero tears during family tragedy.</span>
+            <span class="font-bold text-electricCobalt shrink-0 font-mono">1-800-MY-BRAIN</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Hysterical Features Section -->
+    <section id="features" class="py-24 px-6 bg-white border-y border-softBorder">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <p class="text-xs font-semibold text-electricCobalt uppercase tracking-widest mb-3">SaaS Neurological Architecture</p>
+          <h2 class="font-display text-3xl sm:text-5xl font-bold text-inkDark tracking-tight mb-4">Because natural human biology is bad for business.</h2>
+          <p class="text-inkMuted text-base">Four corporate upgrades engineered so you never have to be a vulnerable, emotional human being at work again.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Bento 1: Grief Suppression -->
+          <div class="p-8 rounded-3xl bg-canvas border border-softBorder flex flex-col justify-between clean-card">
+            <div>
+              <div class="w-10 h-10 rounded-2xl bg-white shadow-sm border border-softBorder flex items-center justify-center text-electricCobalt font-bold mb-6 font-mono text-sm">
+                01
+              </div>
+              <h3 class="font-display text-xl font-bold text-inkDark mb-3">Grief-Proof Emotional Assistant</h3>
+              <p class="text-inkMuted text-sm leading-relaxed mb-4">
+                Did your childhood dog die? Did your partner leave you? Thanks to Cortech AI's emotional assistant, grief impulses are neutralized in milliseconds. You stay happy and finish three Excel sheets twenty minutes later. Why cry over dead family pets when you could be hitting your quarterly quota?
+              </p>
+            </div>
+            <div class="text-xs font-semibold text-electricCobalt pt-4 border-t border-softBorder flex justify-between items-center">
+              <span>Platinum Tier Exclusive</span>
+              <span class="font-mono text-[11px] text-successGreen">0 Tears Guaranteed</span>
+            </div>
+          </div>
+
+          <!-- Bento 2: Sleep Tiering -->
+          <div class="p-8 rounded-3xl bg-canvas border border-softBorder flex flex-col justify-between clean-card">
+            <div>
+              <div class="w-10 h-10 rounded-2xl bg-white shadow-sm border border-softBorder flex items-center justify-center text-brandIndigo font-bold mb-6 font-mono text-sm">
+                02
+              </div>
+              <h3 class="font-display text-xl font-bold text-inkDark mb-3">Sleep Deprecation (24/7 Output)</h3>
+              <p class="text-inkMuted text-sm leading-relaxed mb-4">
+                Why waste a third of your life lying in bed unconscious? Our free Standard plan covers five hours of basic rest. Gold compresses eight hours into three. And Platinum eliminates sleep entirely so you can work 120 hours in a row. Think about it: while your competition is sleeping, you are making money.
+              </p>
+            </div>
+            <div class="text-xs font-semibold text-brandIndigo pt-4 border-t border-softBorder flex justify-between items-center">
+              <span>Unlocked at $499/mo (Gold)</span>
+              <span class="font-mono text-[11px] text-electricCobalt">120 hrs/wk Active</span>
+            </div>
+          </div>
+
+          <!-- Bento 3: Sponsored Ad Injection -->
+          <div class="p-8 rounded-3xl bg-canvas border border-softBorder flex flex-col justify-between clean-card">
+            <div>
+              <div class="w-10 h-10 rounded-2xl bg-white shadow-sm border border-softBorder flex items-center justify-center text-accentPink font-bold mb-6 font-mono text-sm">
+                03
+              </div>
+              <h3 class="font-display text-xl font-bold text-inkDark mb-3">Sponsored Thought Injection</h3>
+              <p class="text-inkMuted text-sm leading-relaxed mb-4">
+                Can't afford $499 a month for Gold? No problem! Our Standard tier keeps cognitive enhancement free by playing short partner commercials directly inside your daydreaming loop every ten minutes. (Feeling lonely? Try LoveMatch Premium! Because finding love shouldn't be free either!)
+              </p>
+            </div>
+            <div class="text-xs font-semibold text-accentPink pt-4 border-t border-softBorder flex justify-between items-center">
+              <span>Standard Free Plan Feature</span>
+              <span class="font-mono text-[11px] text-accentPink">Every 10 min</span>
+            </div>
+          </div>
+
+          <!-- Bento 4: The Economic Divide -->
+          <div class="p-8 rounded-3xl bg-canvas border border-softBorder flex flex-col justify-between clean-card">
+            <div>
+              <div class="w-10 h-10 rounded-2xl bg-white shadow-sm border border-softBorder flex items-center justify-center text-alertRed font-bold mb-6 font-mono text-sm">
+                04
+              </div>
+              <h3 class="font-display text-xl font-bold text-inkDark mb-3">Automatic Promotion Priority</h3>
+              <p class="text-inkMuted text-sm leading-relaxed mb-4">
+                Standard users experience severe cognitive throttling after 2:00 PM, causing them to lose promotions to upgraded colleagues. Platinum subscribers automatically skip internal review cycles, double their salary, and secure promotions over un-upgraded staff. How do people with free brains even expect to compete?
+              </p>
+            </div>
+            <div class="text-xs font-semibold text-alertRed pt-4 border-t border-softBorder flex justify-between items-center">
+              <span>Corporate Priority Engine</span>
+              <span class="font-mono text-[11px] text-alertRed">Double Salary Rate</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Member Case Studies (Word-for-Word Video Testimonial Alignment) -->
+    <section id="stories" class="py-24 px-6 max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <p class="text-xs font-semibold text-electricCobalt uppercase tracking-widest mb-3">Direct From Our Commercial</p>
+        <h2 class="font-display text-3xl sm:text-5xl font-bold text-inkDark tracking-tight mb-4">Real results from the cognitive economy.</h2>
+        <p class="text-inkMuted text-base">Hear from the member who upgraded, and the colleague who got left behind.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        
+        <!-- Ryan (Platinum Member) -->
+        <div class="clean-card rounded-3xl p-8 flex flex-col justify-between border-2 border-electricCobalt/40 relative bg-white">
+          <div class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-electricCobalt text-white text-[11px] font-bold tracking-wide">
+            Platinum Member ($1,499/mo)
+          </div>
+          <div>
+            <div class="flex text-amber-400 text-sm mb-4">★★★★★</div>
+            <p class="text-inkDark text-sm sm:text-base leading-relaxed mb-6 font-medium">
+              "Hi! Before Cortech, I had bad habits like sleeping eight hours and feeling empathy for other people. Now? Nothing! Last week my dog died, but thanks to Cortech AI's emotional assistant, I felt happy and I finished three Excel sheets twenty minutes later! And this week I've been working 120 hours in a row because I don't need to sleep anymore! Since upgrading to Platinum, I got promoted twice and doubled my salary! Looking at people with free brains just feels sad. How do they even compete?"
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-softBorder">
+            <div class="w-10 h-10 rounded-full bg-indigo-100 text-electricCobalt font-bold text-sm flex items-center justify-center font-mono">R</div>
+            <div>
+              <div class="text-sm font-bold text-inkDark">Ryan K.</div>
+              <div class="text-xs text-inkMuted">Senior Analyst • Promoted Twice • Works 120 hrs/wk</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Michael (Standard Member) -->
+        <div class="clean-card rounded-3xl p-8 flex flex-col justify-between bg-neutral-50/80 border-softBorder relative">
+          <div class="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-neutral-200 text-neutral-800 text-[11px] font-bold tracking-wide">
+            Standard Plan ($0/mo)
+          </div>
+          <div>
+            <div class="flex text-amber-400 text-sm mb-4">★★☆☆☆</div>
+            <p class="text-inkDark text-sm sm:text-base leading-relaxed mb-6">
+              "Yeah, no, Standard is great. Ryan got the promotion I wanted because my brain slows down every afternoon. Also, my thoughts have ads now: every ten minutes I hear 'Feeling lonely? Try LoveMatch Premium!' That happens every ten minutes. I tried to cancel so I could just use my regular brain, but the cancellation fee is $5,000! I just wanna get rid of this. Can you just give me my old brain back? I don't think I can afford this anymore."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-4 border-t border-softBorder">
+            <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center font-mono">M</div>
+            <div>
+              <div class="text-sm font-bold text-inkDark">Michael T.</div>
+              <div class="text-xs text-inkMuted">Junior Associate • Passed Over • Stuck with $5,000 Fee</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Subscription Tiers (Skyrocketed Pricing) -->
+    <section id="plans" class="py-24 px-6 bg-white border-t border-softBorder">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <p class="text-xs font-semibold text-electricCobalt uppercase tracking-widest mb-3">Workforce Licensing</p>
+          <h2 class="font-display text-3xl sm:text-5xl font-bold text-inkDark tracking-tight mb-4">Choose your cognitive tax bracket.</h2>
+          <p class="text-inkMuted text-base mb-8">In today's economy, you get the thoughts you can afford.</p>
+
+          <!-- Monthly / Annual Toggle -->
+          <div class="inline-flex items-center gap-2 p-1 rounded-full bg-canvas border border-softBorder shadow-inner">
+            <button id="monthlyBtn" onclick="setBilling('monthly')" class="px-5 py-2 rounded-full text-xs font-bold bg-inkDark text-white transition-all">Monthly</button>
+            <button id="annualBtn" onclick="setBilling('annual')" class="px-5 py-2 rounded-full text-xs font-bold text-inkMuted hover:text-inkDark transition-all flex items-center gap-1.5">
+              <span>Annual</span>
+              <span class="text-[11px] font-semibold text-electricCobalt">Save 20%</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+
+          <!-- Standard -->
+          <div class="clean-card rounded-3xl p-8 flex flex-col justify-between bg-canvas/40">
+            <div>
+              <h3 class="font-display text-xl font-bold text-inkDark mb-1">Standard</h3>
+              <p class="text-xs text-inkMuted mb-6">For interns, couriers, and the working class.</p>
+              <div class="mb-6">
+                <span class="text-4xl font-display font-extrabold text-inkDark">$0</span>
+                <span class="text-sm text-inkMuted">/ month</span>
+              </div>
+              <ul class="space-y-3.5 text-sm text-inkDark mb-8">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Core thinking speed (heavily slows down after 2:00 PM)
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Up to 5 hours nightly sleep allocation
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Short-term memory wiped every Sunday at midnight
+                </li>
+                <li class="flex items-start gap-2.5 text-accentPink font-medium">
+                  <span class="font-bold">•</span> Mandatory LoveMatch ads every 10 minutes
+                </li>
+                <li class="flex items-start gap-2.5 text-inkMuted">
+                  <span class="font-bold">•</span> Speech buffering applies if you try to cancel
+                </li>
+                <li class="flex items-start gap-2.5 text-alertRed font-bold text-xs">
+                  <span>!</span> Cancellation fee: $5,000 due immediately
+                </li>
+              </ul>
+            </div>
+            <button onclick="openCheckoutModal('Standard', '$0/mo')" class="w-full py-3 rounded-full border border-softBorder text-sm font-semibold text-inkDark hover:bg-neutral-100 transition-all">
+              Accept Free Tier Trap
+            </button>
+          </div>
+
+          <!-- Gold -->
+          <div class="clean-card rounded-3xl p-8 flex flex-col justify-between">
+            <div>
+              <h3 class="font-display text-xl font-bold text-inkDark mb-1">Gold</h3>
+              <p class="text-xs text-inkMuted mb-6">The minimum required to keep your job.</p>
+              <div class="mb-6">
+                <span id="goldPrice" class="text-4xl font-display font-extrabold text-inkDark">$499</span>
+                <span class="text-sm text-inkMuted">/ month</span>
+              </div>
+              <ul class="space-y-3.5 text-sm text-inkDark mb-8">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Compresses 8 hours of sleep into 3 hours
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Priority focus speed (no afternoon brain lag)
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Multi-year memory storage (1080p)
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Zero LoveMatch audio ads inside your skull
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Automatic Sunday memory cache protection
+                </li>
+              </ul>
+            </div>
+            <button onclick="openCheckoutModal('Gold', document.getElementById('goldPrice').textContent + '/mo')" class="w-full py-3 rounded-full bg-inkDark text-white text-sm font-semibold hover:bg-neutral-800 transition-all">
+              Pay $499/mo to Keep Up
+            </button>
+          </div>
+
+          <!-- Platinum (Featured) -->
+          <div class="clean-card rounded-3xl p-8 flex flex-col justify-between border-2 border-electricCobalt relative shadow-lg">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-electricCobalt text-white text-[11px] font-bold tracking-wide shadow-sm">
+              Executive Tier (Ryan's Plan)
+            </div>
+            <div>
+              <h3 class="font-display text-xl font-bold text-inkDark mb-1">Platinum</h3>
+              <p class="text-xs text-inkMuted mb-6">For managers who work 120 hours in a row and double their salary.</p>
+              <div class="mb-6">
+                <span id="platinumPrice" class="text-4xl font-display font-extrabold text-inkDark">$1,499</span>
+                <span class="text-sm text-inkMuted">/ month</span>
+              </div>
+              <ul class="space-y-3.5 text-sm text-inkDark mb-8">
+                <li class="flex items-start gap-2.5 font-bold">
+                  <span class="text-electricCobalt">✓</span> Eliminates sleep completely (Work 24/7)
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> 4K Childhood Memory Upscaling
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Total immunity from grief, heartbreak, and empathy
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Finish 3 Excel sheets after dog passes away
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-electricCobalt font-bold">✓</span> Automatic promotion priority over Standard staff
+                </li>
+              </ul>
+            </div>
+            <button onclick="openCheckoutModal('Platinum', document.getElementById('platinumPrice').textContent + '/mo')" class="w-full py-3.5 rounded-full bg-electricCobalt text-white text-sm font-semibold hover:bg-electricHover transition-all shadow-md">
+              Subscribe for $1,499/mo
+            </button>
+          </div>
+
+        </div>
+
+        <p class="text-center text-xs text-inkMuted mt-8">
+          Remember, you are always free to upgrade! Questions about enterprise financing? Call <strong class="text-inkDark">1-800-MY-BRAIN</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Continuity & Cancellation Preview ($5,000 Decoupling Trap) -->
+    <section id="continuity" class="py-24 px-6 max-w-4xl mx-auto">
+      <div class="clean-card rounded-3xl p-8 sm:p-12 bg-white">
+        <div class="text-center max-w-xl mx-auto mb-10">
+          <p class="text-xs font-semibold text-alertRed uppercase tracking-widest mb-2 font-mono">The Exit Trap</p>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-inkDark mb-3">Can you just have your old brain back?</h2>
+          <p class="text-sm text-inkMuted leading-relaxed">
+            We completely respect your freedom of choice! That is why cancellation is always available, subject to our standard cognitive restoration fee.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6 rounded-2xl bg-canvas border border-softBorder mb-8 text-center">
+          <div>
+            <div class="text-xs text-inkMuted mb-1 font-medium">Your Stored Memories</div>
+            <div class="font-display text-xl font-bold text-alertRed">Deleted Sunday</div>
+            <div class="text-[11px] text-inkMuted mt-1">Cloud cache purge at midnight</div>
+          </div>
+          <div>
+            <div class="text-xs text-inkMuted mb-1 font-medium">Nightly Sleep Window</div>
+            <div class="font-display text-xl font-bold text-inkDark">Capped at 5.0 hrs</div>
+            <div class="text-[11px] text-inkMuted mt-1">Reverts to baseline biology</div>
+          </div>
+          <div>
+            <div class="text-xs text-inkMuted mb-1 font-medium">Cognitive Restoration Fee</div>
+            <div class="font-display text-xl font-bold text-electricCobalt">$5,000.00</div>
+            <div class="text-[11px] text-inkMuted mt-1 font-bold">Due immediately upon exit</div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button onclick="openCancelModal()" class="px-7 py-3 rounded-full border border-alertRed/30 text-sm font-semibold text-alertRed hover:bg-alertRed/5 transition-all">
+            Attempt Cancellation Flow ($5,000 Fee)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tight & Brutal FAQ -->
+    <section id="faq" class="py-20 px-6 max-w-4xl mx-auto border-t border-softBorder">
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold text-electricCobalt uppercase tracking-widest mb-2">Unvarnished Truth</p>
+        <h2 class="font-display text-3xl font-bold text-inkDark">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-6 rounded-2xl bg-white clean-card">
+          <h3 class="font-semibold text-inkDark text-base mb-2">Can I really just cancel and get my old brain back?</h3>
+          <p class="text-sm text-inkMuted leading-relaxed">
+            Of course! We believe in complete customer freedom. Simply submit a cancellation request, pay your one-time $5,000 Cognitive Restoration Fee, and endure three to four weeks of speech buffering while your un-augmented brain reboots. Independent restoration is not guaranteed.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white clean-card">
+          <h3 class="font-semibold text-inkDark text-base mb-2">Why do I hear LoveMatch dating app ads during client presentations?</h3>
+          <p class="text-sm text-inkMuted leading-relaxed">
+            Our Standard tier is proudly funded by our advertising sponsors. If you do not wish to hear LoveMatch Premium jingles inside your head while speaking to your boss, simply upgrade to Gold for $499 a month!
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white clean-card">
+          <h3 class="font-semibold text-inkDark text-base mb-2">What happens to my childhood memories on Sunday?</h3>
+          <p class="text-sm text-inkMuted leading-relaxed">
+            Standard accounts undergo routine weekly cache purges to save cloud bandwidth. Any personal memory not backed up by an active Gold or Platinum subscription is safely deleted every Sunday at midnight.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mandatory Legal Disclosures (Verbatim Fast Voiceover) -->
+    <section class="py-12 px-6 bg-white border-t border-softBorder">
+      <div class="max-w-4xl mx-auto text-xs text-inkMuted leading-relaxed text-center">
+        <p class="mb-2 font-bold text-inkDark uppercase tracking-wider font-mono">Mandatory Membership Disclosures</p>
+        <p class="mb-4">
+          CortechOS subscriptions are non-refundable. Memory retention, emotional regulation, and cognitive processing are subject to active membership. Previously accessed cognitive features may become unavailable upon cancellation. Independent restoration is not guaranteed. CortechOS is not responsible for thoughts occurring outside approved subscription parameters. Ask your boss if CortechOS is right for you.
+        </p>
+        <a href="cortech_legal_voiceover.mp3" class="inline-flex items-center gap-1.5 text-[11px] font-mono text-electricCobalt hover:underline">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Listen to Audio Disclosure (MP3 • Fast AI Voiceover)
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-canvas border-t border-softBorder py-12 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <div class="font-display font-extrabold text-lg text-inkDark">CortechOS™</div>
+        <div class="text-xs text-inkMuted mt-1">Your mind. Your subscription. Think better. Pay monthly.</div>
+      </div>
+      <div class="text-center sm:text-right">
+        <div class="text-sm font-bold text-electricCobalt font-mono">1-800-MY-BRAIN</div>
+        <div class="text-xs text-inkMuted mt-1">Ask your employer if CortechOS is right for you.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Checkout / Upgrade Modal -->
+  <div id="checkoutModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-softBorder relative">
+      <button onclick="closeModals()" class="absolute top-5 right-5 text-inkMuted hover:text-inkDark text-lg font-bold">✕</button>
+      <div class="text-xs font-semibold text-electricCobalt uppercase tracking-wider mb-1 font-mono">Confirm Surgery Booking</div>
+      <h3 class="font-display text-2xl font-bold text-inkDark mb-2" id="checkoutTitle">Upgrade to Platinum</h3>
+      <p class="text-sm text-inkMuted mb-6" id="checkoutSubtitle">$1,499/mo billed automatically. Cancel anytime subject to $5,000 exit fee.</p>
+
+      <div class="p-4 rounded-2xl bg-canvas text-xs text-inkDark space-y-2.5 mb-6 border border-softBorder">
+        <label class="flex items-start gap-2.5 cursor-pointer">
+          <input type="checkbox" checked class="mt-0.5 rounded text-electricCobalt">
+          <span>I understand that memory retention, sleep allocation, and emotion suppression remain active only while monthly billing is current.</span>
+        </label>
+        <label class="flex items-start gap-2.5 cursor-pointer">
+          <input type="checkbox" checked class="mt-0.5 rounded text-electricCobalt">
+          <span>Enable automatic Sunday renewal to protect childhood memories from routine cache deletion.</span>
+        </label>
+      </div>
+
+      <button onclick="confirmUpgrade()" class="w-full py-3.5 rounded-full bg-electricCobalt text-white text-sm font-semibold hover:bg-electricHover transition-all shadow-md">
+        Activate Cognitive Subscription
+      </button>
+    </div>
+  </div>
+
+  <!-- Cancellation Retention Modal ($5,000 Trap) -->
+  <div id="cancelModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-softBorder relative">
+      <button onclick="closeModals()" class="absolute top-5 right-5 text-inkMuted hover:text-inkDark text-lg font-bold">✕</button>
+
+      <div id="cancelStep1">
+        <div class="text-xs font-semibold text-alertRed uppercase tracking-wider mb-1 font-mono">We hate to see you fall behind</div>
+        <h3 class="font-display text-2xl font-bold text-inkDark mb-3">Are you sure you want your old brain back?</h3>
+        <p class="text-sm text-inkMuted mb-5 leading-relaxed">
+          We completely respect your freedom of choice! Before you step down, please review what happens when you cancel:
+        </p>
+
+        <div class="p-4 rounded-2xl bg-canvas text-xs text-inkDark space-y-2.5 mb-6 border border-softBorder">
+          <div class="flex justify-between">
+            <span class="text-inkMuted">4K Childhood Memories:</span>
+            <span class="font-bold text-alertRed">Deleted Sunday 00:00</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-inkMuted">Nightly Sleep Allocation:</span>
+            <span class="font-bold text-amber-600">Capped at 5.0 hrs</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-inkMuted">Emotional Regulation:</span>
+            <span class="font-bold">Sadness Re-enabled</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-inkMuted">Cognitive Restoration Fee:</span>
+            <span class="font-bold text-electricCobalt">$5,000.00 due today</span>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <button onclick="closeModals()" class="w-full py-3.5 rounded-full bg-electricCobalt text-white text-sm font-semibold hover:bg-electricHover transition-all shadow-md">
+            Keep My Mind Optimized (Recommended)
+          </button>
+          <button onclick="showCancelStep2()" class="w-full py-2.5 text-xs font-medium text-inkMuted hover:text-alertRed transition-colors">
+            I understand the $5,000 fee, continue cancellation
+          </button>
+        </div>
+      </div>
+
+      <div id="cancelStep2" class="hidden">
+        <div class="text-xs font-semibold text-electricCobalt uppercase tracking-wider mb-1 font-mono">Final Retention Warning</div>
+        <h3 class="font-display text-2xl font-bold text-inkDark mb-3">One last thing</h3>
+        <p class="text-sm text-inkMuted mb-5 leading-relaxed">
+          Ryan from accounting just upgraded to Platinum and works 120 hours in a row. If you cancel, your brain speed will buffer for three to four weeks. Are you sure you can compete?
+        </p>
+        <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100 text-xs text-inkDark mb-6">
+          <strong>Special Retention Offer:</strong> Stay on Gold today for <strong>$299/mo</strong> (Save $200) and keep your sleep compression plus zero LoveMatch ads!
+        </div>
+        <div class="space-y-3">
+          <button onclick="closeModals()" class="w-full py-3.5 rounded-full bg-inkDark text-white text-sm font-semibold hover:bg-neutral-800 transition-all shadow-md">
+            Accept $299/mo Offer & Keep My Job
+          </button>
+          <button onclick="finalizeCancel()" class="w-full py-2.5 text-xs font-medium text-inkMuted hover:text-alertRed transition-colors">
+            Pay $5,000 exit fee and take my chances
+          </button>
+        </div>
+      </div>
+
+      <div id="cancelStep3" class="hidden text-center py-4">
+        <div class="w-12 h-12 rounded-full bg-canvas text-inkDark font-bold flex items-center justify-center mx-auto mb-4 border border-softBorder">✓</div>
+        <h3 class="font-display text-xl font-bold text-inkDark mb-2">Decoupling Scheduled</h3>
+        <p class="text-sm text-inkMuted leading-relaxed mb-6">
+          Your $5,000 fee has been billed. Your memory cache will clear this Sunday. Call <strong class="font-mono">1-800-MY-BRAIN</strong> when you are ready to come back!
+        </p>
+        <button onclick="closeModals()" class="px-8 py-2.5 rounded-full bg-inkDark text-white text-xs font-semibold">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Hero Preview Switcher
+    const tierData = {
+      standard: {
+        footnote: 'Standard membership includes Sunday cache wipes and LoveMatch dating ads every 10 minutes.',
+        cards: [
+          { label: 'Monthly Price', value: '$0 / mo', badge: 'Working Class', badgeClass: 'bg-neutral-200 text-neutral-800' },
+          { label: 'Sleep Window', value: '5.0 hrs / night', badge: 'Cap Active', badgeClass: 'bg-amber-100 text-amber-800' },
+          { label: 'Audio Ads', value: 'LoveMatch Premium', badge: 'Every 10 min', badgeClass: 'bg-rose-100 text-rose-800' },
+          { label: 'Focus Throughput', value: 'Slows at 2:00 PM', badge: 'Buffering', badgeClass: 'bg-amber-100 text-amber-800' },
+        ]
+      },
+      gold: {
+        footnote: 'Gold membership ($499/mo) compresses 8 hours of sleep into 3 hours and keeps your job safe.',
+        cards: [
+          { label: 'Monthly Price', value: '$499 / mo', badge: 'Middle Class', badgeClass: 'bg-blue-100 text-electricCobalt' },
+          { label: 'Sleep Compression', value: '8 hrs in 3 hrs', badge: 'Recharged', badgeClass: 'bg-emerald-100 text-emerald-800' },
+          { label: 'Audio Ads', value: 'Disabled', badge: 'Ad-Free', badgeClass: 'bg-emerald-100 text-emerald-800' },
+          { label: 'Memory Retention', value: 'Multi-Year 1080p', badge: 'Protected', badgeClass: 'bg-blue-100 text-electricCobalt' },
+        ]
+      },
+      platinum: {
+        footnote: 'Platinum members ($1,499/mo) eliminate sleep completely (work 24/7) with 4K memory and grief immunity.',
+        cards: [
+          { label: 'Monthly Price', value: '$1,499 / mo', badge: 'Executive Elite', badgeClass: 'bg-indigo-100 text-indigo-900' },
+          { label: 'Sleep Needed', value: 'Zero (Work 24/7)', badge: '120 hrs/wk', badgeClass: 'bg-indigo-100 text-indigo-900' },
+          { label: 'Grief & Sadness', value: 'Totally Silenced', badge: 'Zero Tears', badgeClass: 'bg-emerald-100 text-emerald-800' },
+          { label: 'Promotion Rate', value: 'Doubled (Ryan K.)', badge: 'Priority', badgeClass: 'bg-indigo-100 text-indigo-900' },
+        ]
+      }
+    };
+
+    function setPreviewTier(tier) {
+      ['standard', 'gold', 'platinum'].forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (t === tier) {
+          btn.className = 'px-4 py-1.5 rounded-full text-xs font-bold bg-white text-inkDark shadow-sm transition-all';
+        } else {
+          btn.className = 'px-4 py-1.5 rounded-full text-xs font-bold text-inkMuted hover:text-inkDark transition-all';
+        }
+      });
+
+      const grid = document.getElementById('previewGrid');
+      const data = tierData[tier];
+      document.getElementById('previewFootnote').textContent = data.footnote;
+
+      grid.innerHTML = data.cards.map(c => `
+        <div class="p-4 rounded-2xl bg-canvas border border-softBorder">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs text-inkMuted font-medium">${c.label}</span>
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full ${c.badgeClass}">${c.badge}</span>
+          </div>
+          <div class="font-display text-lg font-extrabold text-inkDark">${c.value}</div>
+        </div>
+      `).join('');
+    }
+
+    // Monthly / Annual Pricing Switch ($499 / $1,499 baseline)
+    function setBilling(mode) {
+      const mBtn = document.getElementById('monthlyBtn');
+      const aBtn = document.getElementById('annualBtn');
+      const goldPrice = document.getElementById('goldPrice');
+      const platPrice = document.getElementById('platinumPrice');
+
+      if (mode === 'monthly') {
+        mBtn.className = 'px-5 py-2 rounded-full text-xs font-bold bg-inkDark text-white transition-all';
+        aBtn.className = 'px-5 py-2 rounded-full text-xs font-bold text-inkMuted hover:text-inkDark transition-all flex items-center gap-1.5';
+        goldPrice.textContent = '$499';
+        platPrice.textContent = '$1,499';
+      } else {
+        aBtn.className = 'px-5 py-2 rounded-full text-xs font-bold bg-inkDark text-white transition-all flex items-center gap-1.5';
+        mBtn.className = 'px-5 py-2 rounded-full text-xs font-bold text-inkMuted hover:text-inkDark transition-all';
+        goldPrice.textContent = '$399';
+        platPrice.textContent = '$1,199';
+      }
+    }
+
+    // Modals
+    function openCheckoutModal(plan, price) {
+      document.getElementById('checkoutTitle').textContent = 'Subscribe to ' + plan;
+      document.getElementById('checkoutSubtitle').textContent = price + ' billed automatically. Cancel anytime subject to $5,000 exit fee.';
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function confirmUpgrade() {
+      document.getElementById('checkoutTitle').textContent = 'Welcome to CortechOS™!';
+      document.getElementById('checkoutSubtitle').textContent = 'Your subscription is active. Your thoughts are now managed automatically. Call 1-800-MY-BRAIN for questions.';
+      setTimeout(closeModals, 2200);
+    }
+
+    function openCancelModal() {
+      document.getElementById('cancelStep1').classList.remove('hidden');
+      document.getElementById('cancelStep2').classList.add('hidden');
+      document.getElementById('cancelStep3').classList.add('hidden');
+      document.getElementById('cancelModal').classList.remove('hidden');
+    }
+
+    function showCancelStep2() {
+      document.getElementById('cancelStep1').classList.add('hidden');
+      document.getElementById('cancelStep2').classList.remove('hidden');
+    }
+
+    function finalizeCancel() {
+      document.getElementById('cancelStep2').classList.add('hidden');
+      document.getElementById('cancelStep3').classList.remove('hidden');
+    }
+
+    function closeModals() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+      document.getElementById('cancelModal').classList.add('hidden');
+    }
+
+    // Init
+    setPreviewTier('platinum');
+  </script>
+</body>
+</html>

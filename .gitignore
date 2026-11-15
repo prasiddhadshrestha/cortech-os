@@ -1,0 +1,6 @@
+# Media temporary files
+*.wav
+
+# System files
+.DS_Store
+Thumbs.db
