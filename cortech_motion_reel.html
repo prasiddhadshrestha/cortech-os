@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CortechOS™ | Motion Explainer Reel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-dark: #07090E;
+      --card-bg: rgba(13, 17, 26, 0.75);
+      --cobalt: #0F62FE;
+      --cyan: #00F0FF;
+      --gold: #F59E0B;
+      --crimson: #EF4444;
+    }
+    body {
+      background-color: var(--bg-dark);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      user-select: none;
+    }
+    .font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Subtle grid pattern like Vercel/Linear */
+    .grid-bg {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Ambient radial glow */
+    .ambient-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      opacity: 0.35;
+      transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Glassmorphism Card */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+    }
+
+    /* Animated Border Beam */
+    .border-beam {
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: beam 4s linear infinite;
+    }
+    @keyframes beam {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Shimmer gradient on text */
+    .text-shimmer {
+      background: linear-gradient(90deg, #FFFFFF 0%, #A5B4FC 50%, #FFFFFF 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    /* Pulse dot */
+    .pulse-dot {
+      box-shadow: 0 0 16px currentColor;
+    }
+  </style>
+</head>
+<body class="w-screen h-screen flex flex-col items-center justify-center text-slate-100 grid-bg relative">
+
+  <!-- Ambient background glow orbs -->
+  <div id="glowOrb" class="ambient-glow bg-blue-600 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+  <div class="ambient-glow bg-cyan-500 -top-40 -left-40 opacity-20"></div>
+
+  <!-- Top Bar: Clean Google / Apple Keynote HUD -->
+  <header class="absolute top-8 left-12 right-12 flex justify-between items-center z-50">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center">
+        <svg class="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="font-display font-extrabold text-lg tracking-tight text-white flex items-center gap-2">
+          CortechOS™ <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">System Keynote</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Scene Indicator -->
+    <div class="flex items-center gap-6">
+      <div id="sceneBadge" class="font-mono text-xs px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300">
+        BEAT 3: FLEXIBLE PLANS
+      </div>
+      <button onclick="togglePlayback()" id="playBtn" class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-xs font-semibold text-white shadow-lg shadow-blue-600/30 transition">
+        <span id="playIcon">▶</span> <span id="playText">PLAY MOTION REEL</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Viewport Container (16:9 ratio locked) -->
+  <main id="motionStage" class="w-full max-w-6xl px-8 flex flex-col items-center justify-center transition-all duration-1000 z-10" style="perspective: 1200px;">
+    
+    <!-- Title Area (Dynamic per beat) -->
+    <div class="text-center mb-10 transition-all duration-700" id="headerGroup">
+      <p id="subHeader" class="text-xs uppercase font-mono tracking-widest text-blue-400 font-semibold mb-2">NEURAL LICENSING ARCHITECTURE</p>
+      <h1 id="mainHeader" class="font-display text-4xl md:text-5xl font-black text-shimmer tracking-tight">
+        A Plan for Every Budget.
+      </h1>
+      <p id="descHeader" class="text-sm text-slate-400 mt-2 max-w-xl mx-auto">
+        Rent your biological consciousness. Choose your sleep compression tier.
+      </p>
+    </div>
+
+    <!-- 3 Pricing Cards Grid -->
+    <div id="cardsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full items-stretch transition-all duration-1000">
+
+      <!-- CARD 1: STANDARD -->
+      <div id="cardStandard" class="glass-card rounded-2xl p-7 flex flex-col justify-between relative overflow-hidden transition-all duration-700">
+        <div class="relative z-10">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">Base Tier</span>
+            <span id="tagStandard" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Free to Enter</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-white mb-1">Standard</h3>
+          <p class="text-xs text-slate-400 mb-6">Gets you in the door for free.</p>
+          
+          <div class="flex items-baseline gap-1 mb-6">
+            <span class="font-display text-4xl font-extrabold text-white">$0</span>
+            <span class="text-xs font-mono text-slate-500">/ month</span>
+          </div>
+
+          <!-- Feature Specs -->
+          <div class="space-y-3.5 border-t border-white/5 pt-5 text-xs text-slate-300">
+            <div class="flex items-center gap-2.5">
+              <span class="text-amber-400 text-sm">⏱</span>
+              <span>Sleep Cap: <strong>5 Hours Max</strong></span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="text-rose-400 text-sm">📉</span>
+              <span>Afternoon Throttle: <strong>2G Bandwidth</strong></span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="text-rose-400 text-sm">📢</span>
+              <span>Thought Ads: <strong>Every 10 mins</strong></span>
+            </div>
+            <div class="flex items-center gap-2.5 text-slate-500">
+              <span class="text-slate-600 text-sm">🔒</span>
+              <span>Exit Fee: <strong>$5,000 USD</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-white/5">
+          <div class="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-center font-semibold text-xs text-slate-400">
+            Current Tier: Default
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: GOLD -->
+      <div id="cardGold" class="glass-card rounded-2xl p-7 flex flex-col justify-between relative overflow-hidden transition-all duration-700">
+        <!-- Accent Glow -->
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-blue-600/30 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold">Compressor</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">Popular</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-white mb-1">Gold</h3>
+          <p class="text-xs text-slate-400 mb-6">Compress 8 hours into 3 hours.</p>
+          
+          <div class="flex items-baseline gap-1 mb-6">
+            <span class="font-display text-4xl font-extrabold text-white">$499</span>
+            <span class="text-xs font-mono text-slate-500">/ month</span>
+          </div>
+
+          <!-- Animated Sleep Compression Graphic -->
+          <div class="mb-5 p-3.5 rounded-xl bg-blue-950/30 border border-blue-500/20">
+            <div class="flex justify-between text-[11px] font-mono text-blue-300 mb-1.5">
+              <span>SLEEP EFFICIENCY</span>
+              <span id="goldPercent" class="font-bold">266%</span>
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-full h-2.5 rounded-full bg-slate-800 overflow-hidden relative">
+              <div id="goldBar" class="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full transition-all duration-1000" style="width: 37.5%;"></div>
+            </div>
+            <div class="flex justify-between text-[10px] text-slate-400 mt-1.5">
+              <span>8 hrs raw</span>
+              <span class="text-cyan-400 font-semibold">-> 3 hrs compressed</span>
+            </div>
+          </div>
+
+          <!-- Feature Specs -->
+          <div class="space-y-3.5 border-t border-white/5 pt-5 text-xs text-slate-300">
+            <div class="flex items-center gap-2.5">
+              <span class="text-emerald-400 text-sm">⚡</span>
+              <span>Recharge Before Sunrise (4:30 AM)</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="text-blue-400 text-sm">🛡</span>
+              <span>Zero Intrusive Audio Ads</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="text-blue-400 text-sm">📈</span>
+              <span>Cognitive Boost: <strong>+180% Focus</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-white/5">
+          <div class="w-full py-2.5 rounded-xl bg-blue-600 text-center font-semibold text-xs text-white shadow-lg shadow-blue-600/30">
+            Upgrade to Gold
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: PLATINUM -->
+      <div id="cardPlatinum" class="glass-card rounded-2xl p-7 flex flex-col justify-between relative overflow-hidden transition-all duration-700">
+        <!-- Border beam animation -->
+        <div id="platinumBeam" class="border-beam hidden"></div>
+
+        <div class="relative z-10">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold">God Mode</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 pulse-dot"></span> Ryan's Pick
+            </span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-white mb-1">Platinum</h3>
+          <p class="text-xs text-slate-400 mb-6">Eliminates sleep completely.</p>
+          
+          <div class="flex items-baseline gap-1 mb-6">
+            <span class="font-display text-4xl font-extrabold text-amber-400">$1,499</span>
+            <span class="text-xs font-mono text-slate-500">/ month</span>
+          </div>
+
+          <!-- Dynamic Cash & Work Counter -->
+          <div class="mb-5 p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20">
+            <div class="flex justify-between text-[11px] font-mono text-amber-300 mb-1">
+              <span>WORK CAPACITY</span>
+              <span class="font-bold">120 HRS / WEEK</span>
+            </div>
+            <div class="text-xl font-display font-extrabold text-emerald-400 mt-1" id="cashTicker">
+              +$9,840.00 <span class="text-[10px] font-mono text-slate-400 font-normal">earned while others slept</span>
+            </div>
+          </div>
+
+          <!-- Feature Specs -->
+          <div class="space-y-3.5 border-t border-white/5 pt-5 text-xs text-slate-300">
+            <div class="flex items-center gap-2.5">
+              <span class="text-amber-400 text-sm">♾</span>
+              <span>Sleep Required: <strong>0.0 Hours</strong></span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="text-amber-400 text-sm">🧠</span>
+              <span>AI Emotional Assistant (Zero Grief)</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <span class="text-amber-400 text-sm">👔</span>
+              <span>Double Salary Guarantee</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-white/5">
+          <div class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-center font-semibold text-xs text-black font-bold shadow-lg shadow-amber-500/20">
+            Activate Platinum
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CLOSER / BOOKING SURGERY OVERLAY (Hidden by default, pops during Beat 6) -->
+    <div id="closerStage" class="hidden w-full max-w-2xl text-center flex-col items-center justify-center transition-all duration-1000">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono mb-4">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span> NEXT CRANIOTOMY SLOT: TODAY AT 2:15 PM
+      </div>
+      <h2 class="font-display text-5xl font-black text-white tracking-tight mb-4">
+        Book Your Surgery Now.
+      </h2>
+      <p class="text-slate-400 text-sm max-w-md mx-auto mb-8">
+        Outpatient neural docking takes 15 minutes. Why settle for the brain you were born with?
+      </p>
+
+      <!-- Giant Glowing CTA Button -->
+      <a href="tel:18006927246" class="px-10 py-5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-display font-extrabold text-xl shadow-2xl shadow-blue-500/50 hover:scale-105 transition-all duration-300 border border-white/20 flex items-center gap-3 mx-auto">
+        <span>BOOK OUTPATIENT DOCKING</span>
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
+
+      <!-- Contact Telemetry -->
+      <div class="mt-10 flex items-center justify-center gap-8 text-xs font-mono text-slate-400">
+        <div class="flex items-center gap-2">
+          <span class="text-blue-400 font-bold">HOTLINE:</span> 1-800-MY-BRAIN
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-blue-400 font-bold">PORTAL:</span> CortechOS.com
+        </div>
+        <div class="flex items-center gap-2 text-rose-400">
+          <span class="font-bold">STATUS:</span> 4 SLOTS REMAINING
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Timeline Progress Bar (Keynote Playhead) -->
+  <footer class="absolute bottom-6 left-12 right-12 z-50">
+    <div class="flex justify-between items-center text-[11px] font-mono text-slate-500 mb-2">
+      <span id="timecode">00:00 / 00:22</span>
+      <span id="cueTitle">CUE 1: INTRODUCE TIERS</span>
+    </div>
+    <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden cursor-pointer" onclick="scrubTimeline(event)">
+      <div id="playhead" class="h-full bg-gradient-to-r from-blue-600 via-cyan-400 to-amber-400 w-0 transition-all duration-100"></div>
+    </div>
+  </footer>
+
+  <script>
+    let isPlaying = false;
+    let currentTime = 0;
+    const totalDuration = 22; // 22 seconds total motion reel
+    let interval = null;
+
+    const cardsGrid = document.getElementById('cardsGrid');
+    const closerStage = document.getElementById('closerStage');
+    const headerGroup = document.getElementById('headerGroup');
+    const cardStandard = document.getElementById('cardStandard');
+    const cardGold = document.getElementById('cardGold');
+    const cardPlatinum = document.getElementById('cardPlatinum');
+    const platinumBeam = document.getElementById('platinumBeam');
+    const glowOrb = document.getElementById('glowOrb');
+
+    const cueTitle = document.getElementById('cueTitle');
+    const timecode = document.getElementById('timecode');
+    const playhead = document.getElementById('playhead');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const playText = document.getElementById('playText');
+    const sceneBadge = document.getElementById('sceneBadge');
+
+    function togglePlayback() {
+      if (isPlaying) {
+        pause();
+      } else {
+        play();
+      }
+    }
+
+    function play() {
+      isPlaying = true;
+      playIcon.textContent = '⏸';
+      playText.textContent = 'PAUSE';
+      interval = setInterval(() => {
+        currentTime += 0.1;
+        if (currentTime >= totalDuration) {
+          currentTime = 0;
+        }
+        updateDirector(currentTime);
+      }, 100);
+    }
+
+    function pause() {
+      isPlaying = false;
+      playIcon.textContent = '▶';
+      playText.textContent = 'RESUME';
+      clearInterval(interval);
+    }
+
+    function scrubTimeline(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      currentTime = pos * totalDuration;
+      updateDirector(currentTime);
+    }
+
+    // Dynamic Camera / Scene Director Engine
+    function updateDirector(t) {
+      // Progress UI
+      const percent = (t / totalDuration) * 100;
+      playhead.style.width = percent + '%';
+      
+      const mins = Math.floor(t / 60).toString().padStart(2, '0');
+      const secs = Math.floor(t % 60).toString().padStart(2, '0');
+      timecode.textContent = `${mins}:${secs} / 00:22`;
+
+      // 0s - 3s: Intro (all 3 cards visible)
+      if (t < 3.5) {
+        cueTitle.textContent = 'CUE 1: A PLAN FOR EVERY BUDGET';
+        sceneBadge.textContent = 'BEAT 3: FLEXIBLE PLANS';
+        cardsGrid.classList.remove('hidden');
+        closerStage.classList.add('hidden');
+        headerGroup.classList.remove('opacity-0', 'scale-95');
+
+        resetCardScales();
+        glowOrb.style.background = '#0F62FE';
+        glowOrb.style.left = '50%';
+        platinumBeam.classList.add('hidden');
+      }
+      // 3.5s - 7.5s: Standard Tier Spotlight
+      else if (t >= 3.5 && t < 7.5) {
+        cueTitle.textContent = 'CUE 2: STANDARD PLAN (FREE IN THE DOOR)';
+        sceneBadge.textContent = 'FOCUS: STANDARD ($0/MO)';
+        
+        cardStandard.style.transform = 'scale(1.08) translateZ(30px)';
+        cardStandard.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+        cardStandard.style.opacity = '1';
+
+        cardGold.style.transform = 'scale(0.95)';
+        cardGold.style.opacity = '0.35';
+
+        cardPlatinum.style.transform = 'scale(0.95)';
+        cardPlatinum.style.opacity = '0.35';
+
+        glowOrb.style.background = '#EF4444';
+        glowOrb.style.left = '25%';
+      }
+      // 7.5s - 12.0s: Gold Tier Spotlight (Sleep Compression)
+      else if (t >= 7.5 && t < 12.0) {
+        cueTitle.textContent = 'CUE 3: GOLD (COMPRESS 8 HOURS INTO 3)';
+        sceneBadge.textContent = 'FOCUS: GOLD ($499/MO)';
+
+        cardStandard.style.transform = 'scale(0.95)';
+        cardStandard.style.opacity = '0.35';
+        cardStandard.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+
+        cardGold.style.transform = 'scale(1.10) translateZ(40px)';
+        cardGold.style.borderColor = 'rgba(0, 240, 255, 0.6)';
+        cardGold.style.boxShadow = '0 0 50px rgba(15, 98, 254, 0.4)';
+        cardGold.style.opacity = '1';
+
+        cardPlatinum.style.transform = 'scale(0.95)';
+        cardPlatinum.style.opacity = '0.35';
+
+        glowOrb.style.background = '#00F0FF';
+        glowOrb.style.left = '50%';
+      }
+      // 12.0s - 16.5s: Platinum God Mode
+      else if (t >= 12.0 && t < 16.5) {
+        cueTitle.textContent = 'CUE 4: PLATINUM (ZERO SLEEP, 120H REVENUE)';
+        sceneBadge.textContent = 'FOCUS: PLATINUM ($1,499/MO)';
+
+        cardStandard.style.transform = 'scale(0.92)';
+        cardStandard.style.opacity = '0.25';
+
+        cardGold.style.transform = 'scale(0.92)';
+        cardGold.style.opacity = '0.25';
+        cardGold.style.boxShadow = 'none';
+        cardGold.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+
+        cardPlatinum.style.transform = 'scale(1.12) translateZ(50px)';
+        cardPlatinum.style.borderColor = 'rgba(245, 158, 11, 0.8)';
+        cardPlatinum.style.boxShadow = '0 0 60px rgba(245, 158, 11, 0.35)';
+        cardPlatinum.style.opacity = '1';
+        platinumBeam.classList.remove('hidden');
+
+        glowOrb.style.background = '#F59E0B';
+        glowOrb.style.left = '75%';
+
+        // Dynamic ticker
+        const extraCash = Math.floor(5000 + (t - 12) * 2000);
+        document.getElementById('cashTicker').innerHTML = `+$${extraCash.toLocaleString()}.00 <span class="text-[10px] font-mono text-slate-400 font-normal">earned while others slept</span>`;
+      }
+      // 16.5s - 22.0s: The Closer (Book The Surgery Now)
+      else if (t >= 16.5) {
+        cueTitle.textContent = 'CUE 5: THE CLOSER (BOOK SURGERY NOW)';
+        sceneBadge.textContent = 'BEAT 6: 1-800-MY-BRAIN';
+
+        cardsGrid.classList.add('hidden');
+        headerGroup.classList.add('opacity-0', 'scale-95');
+        closerStage.classList.remove('hidden');
+        closerStage.classList.add('flex');
+
+        glowOrb.style.background = '#0F62FE';
+        glowOrb.style.left = '50%';
+      }
+    }
+
+    function resetCardScales() {
+      cardStandard.style.transform = 'scale(1)';
+      cardStandard.style.opacity = '1';
+      cardStandard.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+
+      cardGold.style.transform = 'scale(1)';
+      cardGold.style.opacity = '1';
+      cardGold.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+      cardGold.style.boxShadow = 'none';
+
+      cardPlatinum.style.transform = 'scale(1)';
+      cardPlatinum.style.opacity = '1';
+      cardPlatinum.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+      cardPlatinum.style.boxShadow = 'none';
+    }
+
+    // Keyboard controls (Space to Play/Pause, Arrow keys to scrub)
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlayback();
+      } else if (e.code === 'ArrowRight') {
+        currentTime = Math.min(totalDuration, currentTime + 2);
+        updateDirector(currentTime);
+      } else if (e.code === 'ArrowLeft') {
+        currentTime = Math.max(0, currentTime - 2);
+        updateDirector(currentTime);
+      }
+    });
+  </script>
+</body>
+</html>
