@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CortechOS™ | Because Even Your Thoughts Deserve a Premium Subscription</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #06090F;
+      color: #F8FAFC;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-body { font-family: 'Inter', sans-serif; }
+
+    /* Subtle technical grid */
+    .tech-grid {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Ambient spotlight glow */
+    .spotlight {
+      position: absolute;
+      width: 750px;
+      height: 750px;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      opacity: 0.28;
+    }
+
+    /* Smooth Floating Physics */
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-16px) rotate(1.5deg); }
+    }
+    .float-chip {
+      animation: floating 4.5s ease-in-out infinite;
+    }
+
+    /* Glowing Rotating Border Beam */
+    .neon-border-box {
+      position: relative;
+      background: rgba(13, 18, 29, 0.85);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(15, 98, 254, 0.35);
+      box-shadow: 0 0 50px rgba(15, 98, 254, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    .neon-border-box::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: conic-gradient(from 0deg, transparent 0%, #0F62FE 25%, #00F0FF 50%, #0F62FE 75%, transparent 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: rotateGlow 4s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Gradient Shimmer on Header */
+    .title-shimmer {
+      background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 45%, #93C5FD 80%, #FFFFFF 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+    }
+  </style>
+</head>
+<body class="w-screen min-h-screen flex flex-col justify-between items-center tech-grid relative px-6 py-10 selection:bg-blue-600 selection:text-white">
+
+  <!-- Ambient background glow orbs -->
+  <div class="spotlight bg-blue-600 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+  <div class="spotlight bg-cyan-400 -top-40 -left-40 opacity-15"></div>
+
+  <!-- Top Minimalist Brand Header -->
+  <header class="w-full max-w-6xl flex justify-between items-center relative z-20">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center">
+        <svg class="w-5 h-5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+      </div>
+      <a href="index.html" class="font-extrabold text-xl tracking-tight text-white hover:text-cyan-400 transition">
+        CortechOS™
+      </a>
+      <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-blue-500/10 text-cyan-300 border border-blue-500/25 ml-1">
+        Hardware Release 2026
+      </span>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html#pricing" class="text-xs font-mono text-slate-400 hover:text-white transition">
+        View Pricing Matrix ($0 - $14,999) →
+      </a>
+    </div>
+  </header>
+
+  <!-- Central Showcase Section (Built specifically for your closer video cut) -->
+  <main class="w-full max-w-4xl flex flex-col items-center text-center my-auto py-12 relative z-20">
+    
+    <!-- Verified Hardware Pill Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-cyan-300 text-xs font-mono font-bold tracking-wider mb-6 shadow-lg shadow-blue-500/10">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      C1 SYNAPSE PROCESSOR // DOCKING ACTIVE
+    </div>
+
+    <!-- The Exact Spoken Tagline Headline -->
+    <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-tight mb-4 title-shimmer">
+      CortechOS™
+    </h1>
+    <p class="text-xl sm:text-2xl md:text-3xl font-extrabold text-blue-400 tracking-tight max-w-2xl mx-auto mb-10 leading-snug">
+      Because even your thoughts deserve a premium subscription.
+    </p>
+
+    <!-- Floating 3D Hardware Display Card -->
+    <div class="w-full max-w-md p-8 rounded-3xl neon-border-box mb-10 relative flex flex-col items-center">
+      <!-- Pedestal glow behind chip -->
+      <div class="w-48 h-12 bg-cyan-500/20 rounded-full blur-xl absolute bottom-28 pointer-events-none"></div>
+
+      <!-- The 3D Dino Chip floating with lighting -->
+      <div class="relative w-44 h-44 flex items-center justify-center mb-6">
+        <img src="cortech_chip_transparent.png" alt="Cortech-C1 Neural Chip" class="w-40 h-40 object-contain float-chip drop-shadow-[0_20px_35px_rgba(0,240,255,0.35)]">
+      </div>
+
+      <!-- Telemetry Specs -->
+      <div class="w-full space-y-2 border-t border-white/10 pt-5 text-xs font-mono text-slate-300">
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400">Processor Model:</span>
+          <span class="font-bold text-white">Cortech-C1™ Neural Die</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400">Installation Time:</span>
+          <span class="font-bold text-cyan-400">15-Min Outpatient Procedure</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400">Sleep Dependency:</span>
+          <span class="font-bold text-amber-400">Zero (Work 24/7 Enabled)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Primary Booking Call to Action -->
+    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center w-full max-w-md">
+      <a href="tel:18006927246" class="w-full sm:w-auto px-9 py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-lg shadow-xl shadow-blue-500/40 hover:scale-105 active:scale-95 transition-all duration-200 border border-white/20 flex items-center justify-center gap-3">
+        <span>BOOK THE SURGERY NOW</span>
+        <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
+      <a href="index.html#pricing" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-slate-300 font-mono text-sm border border-white/10 transition flex items-center justify-center">
+        Explore Plans
+      </a>
+    </div>
+
+    <!-- Direct Contact Telemetry -->
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-400">
+      <div class="flex items-center gap-1.5">
+        <span class="text-blue-400 font-bold">HOTLINE:</span> 1-800-MY-BRAIN
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="text-blue-400 font-bold">PORTAL:</span> CortechOS.com
+      </div>
+      <div class="flex items-center gap-1.5 text-emerald-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span>2 SLOTS REMAINING TODAY</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Legal Fine Print Footer (Matches Spoken Voiceover) -->
+  <footer class="w-full max-w-4xl text-center border-t border-white/10 pt-6 relative z-20">
+    <p class="text-[11px] font-mono text-slate-500 leading-relaxed max-w-3xl mx-auto">
+      *CortechOS subscriptions are non-refundable. Memory retention, emotional regulation, and cognitive processing are subject to active membership. Previously accessed cognitive features may become unavailable upon cancellation. Independent restoration is not guaranteed. CortechOS is not responsible for thoughts occurring outside approved subscription parameters. Return of biological brain subject to a non-negotiable $5,000 USD exit fee.
+    </p>
+    <div class="text-[10px] font-mono text-slate-600 mt-3">
+      © 2026 CortechOS™ Corporation. Galesburg & San Francisco. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
